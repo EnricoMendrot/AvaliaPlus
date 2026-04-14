@@ -38,6 +38,9 @@ namespace WebApplication2.Controllers
             return Ok(perfil);
         }
 
+        /*
+         Serve para visualizar cada perfil por Id
+         */
         [HttpGet("visualizar/{id}")]
         public IActionResult GetById(int id)
         {
@@ -47,6 +50,32 @@ namespace WebApplication2.Controllers
                 return NotFound();
             }
             return Ok(perfil);
+
+        }
+
+        [HttpPut("atualizar/{id}")]
+        public IActionResult Update(int id, PerfilViewModel perfilView)
+        {
+            try
+            {
+                if (id != perfilView.Id || _perfilRepository.GetById(id) == null)
+                {
+                    return BadRequest("O ID do perfil não corresponde ao ID fornecido.");
+                }
+
+                var perfil = new Perfil(perfilView.Nome)
+                {
+                    Id = id
+                };
+
+                _perfilRepository.Update(perfil);
+
+                return Ok(perfil);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno no servidor: {ex.Message}");
+            }
 
         }
     }

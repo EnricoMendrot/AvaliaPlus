@@ -35,7 +35,14 @@ namespace WebApplication2.Repository
 
         public void Update(Perfil perfil)
         {
-            throw new NotImplementedException();
+            var existente = _context.Perfil.Find(perfil.Id);
+
+            if (existente == null)
+                return;
+
+            existente.Nome = perfil.Nome;
+
+            _context.SaveChanges();
         }
     }
 }
