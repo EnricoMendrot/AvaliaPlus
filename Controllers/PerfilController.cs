@@ -1,6 +1,7 @@
 ﻿ using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Model;
 using WebApplication2.Repository;
+using WebApplication2.Service;
 using WebApplication2.ViewModel;
 
 namespace WebApplication2.Controllers
@@ -9,11 +10,11 @@ namespace WebApplication2.Controllers
     [Route("perfil")]
     public class PerfilController : ControllerBase
     {
-        private readonly IPerfilRepository _perfilRepository;
+        private readonly PerfilService _perfilService;
 
-        public PerfilController(IPerfilRepository perfilRepository)
+        public PerfilController(PerfilService perfilService)
         {
-            _perfilRepository = perfilRepository ?? throw new ArgumentNullException(nameof(perfilRepository));
+            _perfilService = perfilService;
         }
 
         /*
@@ -22,9 +23,15 @@ namespace WebApplication2.Controllers
         [HttpPost("adicionar")]
         public IActionResult Add(PerfilViewModel perfilView)
         {
-            var perfil = new Perfil(perfilView.Nome);
-            _perfilRepository.Add(perfil);
-            return Ok(perfil);
+            try
+            {
+                var perfil = _perfilService.Add(perfilView);
+                return Ok(perfil);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         /*
@@ -34,7 +41,7 @@ namespace WebApplication2.Controllers
         [HttpGet("visualizar")]
         public IActionResult Get()
         {
-            var perfil = _perfilRepository.GetAll();
+            var perfil = _perfilService.GetAll();
             return Ok(perfil);
         }
 
@@ -44,12 +51,16 @@ namespace WebApplication2.Controllers
         [HttpGet("visualizar/{id}")]
         public IActionResult GetById(int id)
         {
-            var perfil = _perfilRepository.GetById(id);
-            if (perfil == null)
+            try
             {
-                return NotFound();
+                var perfil = _perfilService.GetById(id);
+                return Ok(perfil);
             }
-            return Ok(perfil);
+            catch (KeyNotFoundException ex)
+            {
+
+                return NotFound($"Perfil não encontrado. ID informado: {id}. Detalhe: {ex.Message}");
+            }
 
         }
 
@@ -58,23 +69,12 @@ namespace WebApplication2.Controllers
         {
             try
             {
-                if (id != perfilView.Id || _perfilRepository.GetById(id) == null)
-                {
-                    return BadRequest("O ID do perfil não corresponde ao ID fornecido.");
-                }
-
-                var perfil = new Perfil(perfilView.Nome)
-                {
-                    Id = id
-                };
-
-                _perfilRepository.Update(perfil);
-
-                return Ok(perfil);
+                _perfilService.Update(id, perfilView);
+                return Ok("Perfil atualizado com sucesso");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro interno no servidor: {ex.Message}");
+                return BadRequest(ex.Message);
             }
 
         }

@@ -1,7 +1,8 @@
-using WebApplication2.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
+using WebApplication2.Infrastructure;
 using WebApplication2.Repository;
+using WebApplication2.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<ConnectionContext>(options =>
 );
 
 builder.Services.AddScoped<IPerfilRepository, PerfilRepository>();
+builder.Services.AddScoped<PerfilService>();
 
 var app = builder.Build();
 

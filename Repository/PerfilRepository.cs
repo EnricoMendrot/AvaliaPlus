@@ -25,7 +25,9 @@ namespace WebApplication2.Repository
 
         public List<Perfil> GetAll()
         {
-            return _context.Perfil.ToList();
+            return _context.Perfil
+                .OrderBy(p => p.Id)
+                .ToList();
         }
 
         public Perfil? GetById(int id)
@@ -38,7 +40,7 @@ namespace WebApplication2.Repository
             var existente = _context.Perfil.Find(perfil.Id);
 
             if (existente == null)
-                return;
+                throw new KeyNotFoundException("Perfil não encontrado");
 
             existente.Nome = perfil.Nome;
 
