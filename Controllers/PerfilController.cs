@@ -78,5 +78,19 @@ namespace WebApplication2.Controllers
             }
 
         }
+
+        [HttpDelete("deletar/{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _perfilService.Delete(id);
+                return Ok("Perfil removido com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
     }
 }

@@ -59,5 +59,15 @@ namespace WebApplication2.Service
 
             _perfilRepository.Update(existente);
         }
+
+        public void Delete(int id)
+        {
+            var perfil = _perfilRepository.GetById(id);
+
+            if (perfil == null)
+                throw new Exception("Pefil não encontrado");
+
+            _perfilRepository.Delete(id);
+        }
     }
 }

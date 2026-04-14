@@ -20,7 +20,13 @@ namespace WebApplication2.Repository
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var perfil = _context.Perfil.Find(id);
+
+            if (perfil == null)
+                return;
+
+            _context.Perfil.Remove(perfil);
+            _context.SaveChanges();
         }
 
         public List<Perfil> GetAll()
