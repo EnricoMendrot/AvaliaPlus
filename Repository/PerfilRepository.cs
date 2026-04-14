@@ -1,5 +1,4 @@
 ﻿using WebApplication2.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using WebApplication2.Model;
 
 namespace WebApplication2.Repository
@@ -19,6 +18,11 @@ namespace WebApplication2.Repository
             _context.SaveChanges();
         }
 
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Perfil> GetAll()
         {
             return _context.Perfil.ToList();
@@ -26,7 +30,7 @@ namespace WebApplication2.Repository
 
         public Perfil? GetById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Perfil.Find(id);
         }
 
         public void Update(Perfil perfil)

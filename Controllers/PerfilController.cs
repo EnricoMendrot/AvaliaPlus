@@ -27,11 +27,27 @@ namespace WebApplication2.Controllers
             return Ok(perfil);
         }
 
+        /*
+         Serve para visualizar todos os perfis
+         */
+
         [HttpGet("visualizar")]
         public IActionResult Get()
         {
             var perfil = _perfilRepository.GetAll();
             return Ok(perfil);
+        }
+
+        [HttpGet("visualizar/{id}")]
+        public IActionResult GetById(int id)
+        {
+            var perfil = _perfilRepository.GetById(id);
+            if (perfil == null)
+            {
+                return NotFound();
+            }
+            return Ok(perfil);
+
         }
     }
 }

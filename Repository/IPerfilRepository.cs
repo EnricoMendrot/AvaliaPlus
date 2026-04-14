@@ -8,5 +8,6 @@ namespace WebApplication2.Repository
         Perfil? GetById(int id);
         void Add(Perfil perfil);
         void Update(Perfil perfil);
+        void Delete(int id);
     }
 }
