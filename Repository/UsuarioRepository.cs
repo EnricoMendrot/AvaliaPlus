@@ -20,7 +20,13 @@ namespace WebApplication2.Repository
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var usuario = _context.Usuario.Find(id);
+
+            if (usuario == null)
+                return;
+
+            _context.Usuario.Remove(usuario);
+            _context.SaveChanges();
         }
 
         public IEnumerable<Usuario> GetAll()

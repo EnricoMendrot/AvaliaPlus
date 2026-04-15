@@ -40,7 +40,7 @@ namespace WebApplication2.Service
             {
                 Nome = usuarioView.Nome.Trim(),
                 Email = usuarioView.Email.Trim().ToLower(),
-                Senha = PasswordHasher.HashPassword(usuarioView.Senha),                    // ← idealmente com hash
+                Senha = PasswordHasher.HashPassword(usuarioView.Senha),
                 PerfilId = usuarioView.PerfilId,
                 InstituicaoId = usuarioView.InstituicaoId,
                 CursoId = usuarioView.CursoId
@@ -59,6 +59,24 @@ namespace WebApplication2.Service
             catch (Exception ex)
             {
                 throw new Exception($"Erro ao criar usuário: {ex.Message}", ex);
+            }
+        }
+
+        // ====================== DELETE ====================== //
+        public void Delete(int id)
+        {
+            var usuario = _usuarioRepository.GetById(id);
+
+            if (usuario == null)
+                throw new Exception($"Usuário não encontrado. ID informado: {id}");
+
+            try
+            {
+                _usuarioRepository.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao deletar usuário: {ex.Message}", ex);
             }
         }
     }

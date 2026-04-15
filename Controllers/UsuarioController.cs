@@ -61,5 +61,20 @@ namespace WebApplication2.Controllers
                 return BadRequest($"Erro ao criar usuário: {ex.Message}");
             }
         }
+
+        // ====================== DELETE ====================== //
+        [HttpDelete("deletar/{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _usuarioService.Delete(id);
+                return Ok("Perfil removido com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
     }
 }
