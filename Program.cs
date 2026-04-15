@@ -15,6 +15,9 @@ builder.Services.AddDbContext<ConnectionContext>(options =>
 builder.Services.AddScoped<IPerfilRepository, PerfilRepository>();
 builder.Services.AddScoped<PerfilService>();
 
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<UsuarioService>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

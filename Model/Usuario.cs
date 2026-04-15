@@ -9,12 +9,12 @@ namespace WebApplication2.Model
         public string Nome { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Senha { get; set; } = string.Empty;
-        public int PerfilId { get; set; };
-        public Perfil Perfil { get; set; };
-        public int? InstituicaoId { get; set; };
-        public Instituicao Instituicao { get; set; };
-        public int? CursoId { get; set; };
-        public Curso Curso { get; set; };
+        public int PerfilId { get; set; }
+        public Perfil Perfil { get; set; }
+        public int? InstituicaoId { get; set; }
+        public Instituicao Instituicao { get; set; }
+        public int? CursoId { get; set; }
+        public Curso Curso { get; set; }
 
         public Usuario()
         {

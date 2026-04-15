@@ -11,6 +11,7 @@ namespace WebApplication2.Infrastructure
         {
         }
 
-        public DbSet<Perfil> Perfil { get; set; } 
+        public DbSet<Perfil> Perfil { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
     }
 }
