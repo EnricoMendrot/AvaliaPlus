@@ -1,6 +1,6 @@
 ﻿using WebApplication2.Model;
 
-namespace WebApplication2.Repository
+namespace WebApplication2.Repository.Interfaces
 {
     public interface IUsuarioRepository
     {

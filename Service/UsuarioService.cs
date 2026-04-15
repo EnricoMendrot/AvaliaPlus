@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApplication2.Model;
-using WebApplication2.Repository;
+using WebApplication2.Repository.Interfaces;
 using WebApplication2.Security;
 
 namespace WebApplication2.Service

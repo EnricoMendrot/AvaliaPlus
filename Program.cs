@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using WebApplication2.Infrastructure;
-using WebApplication2.Repository;
+using WebApplication2.Repository.Implementations;
+using WebApplication2.Repository.Interfaces;
 using WebApplication2.Service;
 
 var builder = WebApplication.CreateBuilder(args);
