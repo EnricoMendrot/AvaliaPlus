@@ -25,6 +25,9 @@ namespace WebApplication2.Controllers
             return new OkObjectResult(usuario);
         }
 
+        /*
+         Para visualizar um usuário em específico
+        */
         [HttpGet("visualizar/{id}")]
         public IActionResult GetById(int id)
         {
@@ -36,6 +39,27 @@ namespace WebApplication2.Controllers
             }
 
             return Ok(usuario);
+        }
+
+        // ====================== POST ====================== //
+        [HttpPost("adicionar")]
+        public IActionResult Add([FromBody] UsuarioViewModel usuarioView)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var usuarioCriado = _usuarioService.Add(usuarioView);
+                return CreatedAtAction(
+                    nameof(GetById),
+                    new { id = usuarioCriado.Id },
+                    usuarioCriado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao criar usuário: {ex.Message}");
+            }
         }
     }
 }
