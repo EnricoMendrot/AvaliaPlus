@@ -76,5 +76,35 @@ namespace WebApplication2.Controllers
                 return NotFound(ex.Message);
             }
         }
+
+        // ====================== PUT ====================== //
+        [HttpPut("atualizar/{id}")]
+        public IActionResult Update(int id, [FromBody] UsuarioViewModel usuarioView)
+        {
+            if (id != usuarioView.Id)
+                return BadRequest("ID da URL não corresponde ao ID do corpo");
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                _usuarioService.Update(usuarioView);
+                return Ok("Usuario atualizado com sucesso");
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao atualizar usuário: {ex.Message}");
+            }
+        }
+
     }
 }

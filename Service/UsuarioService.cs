@@ -79,5 +79,34 @@ namespace WebApplication2.Service
                 throw new Exception($"Erro ao deletar usuário: {ex.Message}", ex);
             }
         }
+
+        // ====================== PUT ====================== //
+        public void Update(UsuarioViewModel usuarioView)
+        {
+            if (usuarioView == null)
+                throw new ArgumentNullException(nameof(usuarioView));
+
+            if (usuarioView.Id <= 0)
+                throw new ArgumentException("ID do usuário é obrigatório para atualização");
+
+            // Busca o usuário atual para verificar se existe
+            var existente = _usuarioRepository.GetById(usuarioView.Id);
+            if (existente == null)
+                throw new KeyNotFoundException($"Usuário com ID {usuarioView.Id} não encontrado");
+
+            // Converte ViewModel → Entidade
+            var usuario = new Usuario
+            {
+                Id = usuarioView.Id,
+                Nome = usuarioView.Nome,
+                Email = usuarioView.Email,
+                Senha = usuarioView.Senha,      
+                PerfilId = usuarioView.PerfilId,
+                InstituicaoId = usuarioView.InstituicaoId,
+                CursoId = usuarioView.CursoId
+            };
+
+            _usuarioRepository.Update(usuario);
+        }
     }
 }

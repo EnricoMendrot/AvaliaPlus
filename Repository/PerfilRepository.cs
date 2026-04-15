@@ -1,4 +1,5 @@
-﻿using WebApplication2.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
+using WebApplication2.Infrastructure;
 using WebApplication2.Model;
 
 namespace WebApplication2.Repository
@@ -32,13 +33,16 @@ namespace WebApplication2.Repository
         public List<Perfil> GetAll()
         {
             return _context.Perfil
+                .Include(p => p.Usuarios)
                 .OrderBy(p => p.Id)
                 .ToList();
         }
 
         public Perfil? GetById(int id)
         {
-            return _context.Perfil.Find(id);
+            return _context.Perfil
+                .Include(p => p.Usuarios)
+                .FirstOrDefault(p => p.Id == id);
         }
 
         public void Update(Perfil perfil)

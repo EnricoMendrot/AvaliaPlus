@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebApplication2.Model
 {
@@ -20,10 +21,16 @@ namespace WebApplication2.Model
         [Required]
         public string Senha { get; set; } = string.Empty;
         public int PerfilId { get; set; }
+        
+        [JsonIgnore]
         public Perfil Perfil { get; set; }
         public int? InstituicaoId { get; set; }
+
+        [JsonIgnore]
         public Instituicao Instituicao { get; set; }
         public int? CursoId { get; set; }
+
+        [JsonIgnore]
         public Curso Curso { get; set; }
 
         public Usuario()
