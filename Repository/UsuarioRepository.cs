@@ -32,7 +32,7 @@ namespace WebApplication2.Repository
 
         public Usuario? GetById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Usuario.Find(id);
         }
 
         public void Update(Usuario usuario)

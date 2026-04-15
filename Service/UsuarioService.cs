@@ -19,6 +19,10 @@ namespace WebApplication2.Service
             return _usuarioRepository.GetAll();
         }
 
+        public Usuario? GetById(int id)
+        {
+            return _usuarioRepository.GetById(id);
+        }
 
     }
 }

@@ -41,7 +41,12 @@ namespace WebApplication2.Service
         */
         public Perfil GetById(int id)
         {
-            return _perfilRepository.GetById(id);
+            var existente = _perfilRepository.GetById(id);
+
+            if (existente == null)
+                throw new Exception("Perfil não encontrado");
+
+            return existente;
         }
 
         /*
