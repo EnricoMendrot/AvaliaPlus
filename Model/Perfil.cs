@@ -7,6 +7,8 @@ namespace WebApplication2.Model
     {
         public int Id { get; set; }
         public string Nome { get; set; } = string.Empty; // "Aluno", "Administrador", "Professor"
+
+        public List<Usuario> Usuarios { get; set; } = new List<Usuario>();
         public Perfil()
         {
             
