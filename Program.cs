@@ -19,6 +19,9 @@ builder.Services.AddScoped<PerfilService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<UsuarioService>();
 
+builder.Services.AddScoped<IInstituicaoRepository, InstituicaoRepository>();
+builder.Services.AddScoped<InstituicaoService>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

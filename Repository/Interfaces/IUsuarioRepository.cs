@@ -9,6 +9,5 @@ namespace WebApplication2.Repository.Interfaces
         void Add(Usuario usuario);
         void Update(Usuario usuario);
         void Delete(int id);
-
     }
 }

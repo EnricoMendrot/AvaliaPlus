@@ -18,13 +18,11 @@ namespace WebApplication2.Model
 
         public int PerfilId { get; set; }
 
-        public string PerfilNome { get; set; } = string.Empty;
-
         public int? InstituicaoId { get; set; }
-        public string? InstituicaoNome { get; set; }
 
         public int? CursoId { get; set; }
-        public string? CursoNome { get; set; }
+
+
 
 
     }

@@ -4,7 +4,7 @@ using WebApplication2.Model;
 using WebApplication2.Repository.Interfaces;
 using WebApplication2.Security;
 
-namespace WebApplication2.Repository
+namespace WebApplication2.Repository.Implementations
 {
     public class UsuarioRepository : IUsuarioRepository
     {
