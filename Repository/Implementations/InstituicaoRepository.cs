@@ -29,7 +29,10 @@ namespace WebApplication2.Repository.Implementations
 
         public IEnumerable<Instituicao> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Instituicao
+                .Include(i => i.Usuarios)
+                .OrderBy(i => i.Id)
+                .ToList();
         }
 
         public Instituicao? GetById(int id)

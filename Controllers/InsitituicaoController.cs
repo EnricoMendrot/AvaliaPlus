@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using WebApplication2.Model;
 using WebApplication2.Service;
 using WebApplication2.ViewModel;
 
@@ -36,6 +38,13 @@ namespace WebApplication2.Controllers
         }
 
         // ======================== GET ======================== //
+        [HttpGet("visualizar")]
+        public IActionResult Get()
+        {
+            var instituicao = _instituicaoService.GetAll();
+            return new OkObjectResult(instituicao);
+        }
+        
         [HttpGet("visualizar/{id}")]
         public IActionResult GetById(int id)
         {

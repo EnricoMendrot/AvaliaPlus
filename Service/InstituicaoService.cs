@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApplication2.Infrastructure;
 using WebApplication2.Model;
+using WebApplication2.Repository.Implementations;
 using WebApplication2.Repository.Interfaces;
 using WebApplication2.ViewModel;
 
@@ -53,6 +54,11 @@ namespace WebApplication2.Service
         }
 
         // ======================== GET ======================== //
+
+        public IEnumerable<Instituicao> GetAll()
+        {
+            return _instituicaoRepository.GetAll();
+        }
         public InstituicaoViewModel? GetById(int id)
         {
             var instituicao = _instituicaoRepository.GetById(id);
